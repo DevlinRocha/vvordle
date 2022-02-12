@@ -1,6 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Keyboard from "./components/Keyboard.vue";
+</script>
 
-<template></template>
+<template>
+  <Keyboard />
+</template>
 
 <style>
 *,
