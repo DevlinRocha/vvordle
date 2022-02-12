@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="container">
+  <div class="keyboard">
     <button class="key">Q</button>
     <button class="key">W</button>
     <button class="key">E</button>
@@ -35,8 +35,6 @@
     <button class="key">B</button>
     <button class="key">N</button>
     <button class="key">M</button>
-    <button class="key">K</button>
-    <button class="key">L</button>
     <button class="key large">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -53,4 +51,37 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(20, minmax(auto, 1.25em));
+  grid-auto-rows: 3em;
+  gap: 0.25em;
+  justify-content: center;
+}
+
+.key {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(200, 1%, 51%);
+  color: white;
+  fill: white;
+  border: 0.25em;
+  border-radius: 0.25em;
+  font-size: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+}
+
+.key.large {
+  grid-column: span 3;
+}
+
+.key > svg {
+  width: 1.75em;
+  height: 1.75em;
+}
+</style>
