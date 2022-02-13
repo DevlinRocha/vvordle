@@ -65,7 +65,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsl(200, 1%, 51%);
+  background-color: hsl(
+    var(--hue, 200),
+    var(--saturation, 1%),
+    var(--lightness, 51%)
+  );
   color: white;
   fill: white;
   border: 0.25em;
@@ -83,5 +87,21 @@
 .key > svg {
   width: 1.75em;
   height: 1.75em;
+}
+
+.key.wrong {
+  --lightness: 23%;
+}
+
+.key.wrong-location {
+  --hue: 49;
+  --saturation: 51%;
+  --lightness: 47%;
+}
+
+.key.correct {
+  --hue: 115;
+  --saturation: 29%;
+  --lightness: 43%;
 }
 </style>
