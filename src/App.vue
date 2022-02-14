@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import Keyboard from "./components/Keyboard.vue";
 import Gameboard from "./components/Gameboard.vue";
+
+function handleClick(key: string) {}
 </script>
 
 <template>
   <Gameboard />
-  <Keyboard />
+  <Keyboard @handleClick="handleClick" />
 </template>
 
 <style>

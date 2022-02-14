@@ -2,39 +2,39 @@
 
 <template>
   <div class="keyboard">
-    <button class="key">Q</button>
-    <button class="key">W</button>
-    <button class="key">E</button>
-    <button class="key">R</button>
-    <button class="key">T</button>
-    <button class="key">Y</button>
-    <button class="key">U</button>
-    <button class="key">I</button>
-    <button class="key">O</button>
-    <button class="key">P</button>
+    <button @click="$emit('handleClick', 'Q')" class="key">Q</button>
+    <button @click="$emit('handleClick', 'W')" class="key">W</button>
+    <button @click="$emit('handleClick', 'E')" class="key">E</button>
+    <button @click="$emit('handleClick', 'R')" class="key">R</button>
+    <button @click="$emit('handleClick', 'T')" class="key">T</button>
+    <button @click="$emit('handleClick', 'Y')" class="key">Y</button>
+    <button @click="$emit('handleClick', 'U')" class="key">U</button>
+    <button @click="$emit('handleClick', 'I')" class="key">I</button>
+    <button @click="$emit('handleClick', 'O')" class="key">O</button>
+    <button @click="$emit('handleClick', 'P')" class="key">P</button>
 
     <div class="space"></div>
 
-    <button class="key">A</button>
-    <button class="key">S</button>
-    <button class="key">D</button>
-    <button class="key">F</button>
-    <button class="key">G</button>
-    <button class="key">H</button>
-    <button class="key">J</button>
-    <button class="key">K</button>
-    <button class="key">L</button>
+    <button @click="$emit('handleClick', 'A')" class="key">A</button>
+    <button @click="$emit('handleClick', 'S')" class="key">S</button>
+    <button @click="$emit('handleClick', 'D')" class="key">D</button>
+    <button @click="$emit('handleClick', 'F')" class="key">F</button>
+    <button @click="$emit('handleClick', 'G')" class="key">G</button>
+    <button @click="$emit('handleClick', 'H')" class="key">H</button>
+    <button @click="$emit('handleClick', 'J')" class="key">J</button>
+    <button @click="$emit('handleClick', 'K')" class="key">K</button>
+    <button @click="$emit('handleClick', 'L')" class="key">L</button>
 
     <div class="space"></div>
 
     <button class="key large">Enter</button>
-    <button class="key">Z</button>
-    <button class="key">X</button>
-    <button class="key">C</button>
-    <button class="key">V</button>
-    <button class="key">B</button>
-    <button class="key">N</button>
-    <button class="key">M</button>
+    <button @click="$emit('handleClick', 'Z')" class="key">Z</button>
+    <button @click="$emit('handleClick', 'X')" class="key">X</button>
+    <button @click="$emit('handleClick', 'C')" class="key">C</button>
+    <button @click="$emit('handleClick', 'V')" class="key">V</button>
+    <button @click="$emit('handleClick', 'B')" class="key">B</button>
+    <button @click="$emit('handleClick', 'N')" class="key">N</button>
+    <button @click="$emit('handleClick', 'M')" class="key">M</button>
     <button class="key large">
       <svg
         xmlns="http://www.w3.org/2000/svg"
