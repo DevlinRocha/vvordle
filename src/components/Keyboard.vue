@@ -1,40 +1,38 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="keyboard">
-    <button @click="$emit('handleClick', 'Q')" class="key">Q</button>
-    <button @click="$emit('handleClick', 'W')" class="key">W</button>
-    <button @click="$emit('handleClick', 'E')" class="key">E</button>
-    <button @click="$emit('handleClick', 'R')" class="key">R</button>
-    <button @click="$emit('handleClick', 'T')" class="key">T</button>
-    <button @click="$emit('handleClick', 'Y')" class="key">Y</button>
-    <button @click="$emit('handleClick', 'U')" class="key">U</button>
-    <button @click="$emit('handleClick', 'I')" class="key">I</button>
-    <button @click="$emit('handleClick', 'O')" class="key">O</button>
-    <button @click="$emit('handleClick', 'P')" class="key">P</button>
+    <button
+      v-for="letter in ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']"
+      @click.stop="$emit('keyClick', letter)"
+      class="key"
+      :key="letter"
+    >
+      {{ letter }}
+    </button>
 
-    <div class="space"></div>
+    <div class="space" />
 
-    <button @click="$emit('handleClick', 'A')" class="key">A</button>
-    <button @click="$emit('handleClick', 'S')" class="key">S</button>
-    <button @click="$emit('handleClick', 'D')" class="key">D</button>
-    <button @click="$emit('handleClick', 'F')" class="key">F</button>
-    <button @click="$emit('handleClick', 'G')" class="key">G</button>
-    <button @click="$emit('handleClick', 'H')" class="key">H</button>
-    <button @click="$emit('handleClick', 'J')" class="key">J</button>
-    <button @click="$emit('handleClick', 'K')" class="key">K</button>
-    <button @click="$emit('handleClick', 'L')" class="key">L</button>
+    <button
+      v-for="letter in ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']"
+      @click.stop="$emit('keyClick', letter)"
+      class="key"
+      :key="letter"
+    >
+      {{ letter }}
+    </button>
 
-    <div class="space"></div>
+    <div class="space" />
 
     <button class="key large">Enter</button>
-    <button @click="$emit('handleClick', 'Z')" class="key">Z</button>
-    <button @click="$emit('handleClick', 'X')" class="key">X</button>
-    <button @click="$emit('handleClick', 'C')" class="key">C</button>
-    <button @click="$emit('handleClick', 'V')" class="key">V</button>
-    <button @click="$emit('handleClick', 'B')" class="key">B</button>
-    <button @click="$emit('handleClick', 'N')" class="key">N</button>
-    <button @click="$emit('handleClick', 'M')" class="key">M</button>
+
+    <button
+      v-for="letter in ['Z', 'X', 'C', 'V', 'B', 'N', 'M']"
+      @click.stop="$emit('keyClick', letter)"
+      class="key"
+      :key="letter"
+    >
+      {{ letter }}
+    </button>
+
     <button class="key large">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +43,7 @@
         <path
           fill=""
           d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"
-        ></path>
+        />
       </svg>
     </button>
   </div>
