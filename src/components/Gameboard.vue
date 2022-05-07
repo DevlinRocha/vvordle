@@ -2,7 +2,7 @@
 
 <template>
   <div class="gameboard">
-    <div class="tile" v-for="tile in 30"></div>
+    <div class="tile" v-for="tile in 30" :key="tile" />
   </div>
 </template>
 
@@ -30,5 +30,24 @@
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+
+.tile[data-state="active"] {
+  border-color: hsl(200, 1%, 34%);
+}
+
+.tile[data-state="wrong"] {
+  border: none;
+  background-color: hsl(240, 2%, 23%);
+}
+
+.tile[data-state="wrong-location"] {
+  border: none;
+  background-color: hsl(49, 51%, 47%);
+}
+
+.tile[data-state="correct"] {
+  border: none;
+  background-color: hsl(115, 29%, 43%);
 }
 </style>
