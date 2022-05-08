@@ -1,11 +1,60 @@
-# Vue 3 + Typescript + Vite
+# VVordle
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+VVordle is a Wordle clone built with Vue, Vite, and TypeScript.
 
-## Recommended IDE Setup
+[Try a live demo here!](https://vvordle.vercel.app/) 👈
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+## Instructions
 
-## Type Support For `.vue` Imports in TS
+- Guess the VVORDLE in six tries.
+- Each guess must be a valid five-letter word. Hit the enter button to submit.
+- After each guess, the color of the tiles will change to show how close your guess was to the word.
+  - Green means the letter is in the correct spot.
+  - Yellow means the letter is in the word but in the wrong spot.
+  - Gray means the letter is not in the word in any spot.
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+## Getting Started
+
+Instructions to run the project locally are below.
+
+1. Clone the repository:
+
+```bash
+# HTTPS
+git clone https://github.com/DevlinRocha/vvordle.git
+
+# or
+
+# SSH
+git clone git@github.com:DevlinRocha/vvordle.git
+```
+
+2. Go into the directory and install modules:
+
+```bash
+cd vvordle/
+
+npm install
+
+# or
+
+yarn install
+```
+
+3. Run the development server:
+
+```bash
+npm run dev
+
+# or
+
+yarn dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+## Development
+
+- [Vue](https://vuejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
