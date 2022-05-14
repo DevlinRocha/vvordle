@@ -2,7 +2,7 @@
   <div class="keyboard">
     <button
       v-for="letter in ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']"
-      @click.stop="$emit('keyClick', letter)"
+      @click="$emit('keyClick', letter)"
       class="key"
       :key="letter"
     >
@@ -13,7 +13,7 @@
 
     <button
       v-for="letter in ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']"
-      @click.stop="$emit('keyClick', letter)"
+      @click="$emit('keyClick', letter)"
       class="key"
       :key="letter"
     >
@@ -22,18 +22,18 @@
 
     <div class="space" />
 
-    <button class="key large">Enter</button>
+    <button @click="$emit('enterClick')" class="key large">Enter</button>
 
     <button
       v-for="letter in ['Z', 'X', 'C', 'V', 'B', 'N', 'M']"
-      @click.stop="$emit('keyClick', letter)"
+      @click="$emit('keyClick', letter)"
       class="key"
       :key="letter"
     >
       {{ letter }}
     </button>
 
-    <button class="key large">
+    <button @click="('deleteClick')" class="key large">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"

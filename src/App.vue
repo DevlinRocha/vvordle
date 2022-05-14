@@ -2,12 +2,42 @@
 import Keyboard from "./components/Keyboard.vue";
 import Gameboard from "./components/Gameboard.vue";
 
-function handleClick(key: string) {}
+import { onMounted, onUnmounted, ref } from "vue";
+
+function handleKeyPress(e: KeyboardEvent) {
+  if (e.key === "Enter") return submitGuess();
+  if (e.key === "Backspace") return deleteKey();
+  if (e.key.match(/^[a-z]/)) return pressKey(e.key);
+}
+
+function pressKey(key: string) {
+  console.log(key.toUpperCase());
+}
+
+function submitGuess() {
+  console.log("Submitting...");
+}
+
+function deleteKey() {
+  console.log("Deleting...");
+}
+
+onMounted(() => {
+  document.addEventListener("keydown", handleKeyPress);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleKeyPress);
+});
 </script>
 
 <template>
   <Gameboard />
-  <Keyboard @handleClick="handleClick" />
+  <Keyboard
+    @keyClick="pressKey"
+    @enterClick="submitGuess"
+    @deleteClick="deleteKey"
+  />
 </template>
 
 <style>
