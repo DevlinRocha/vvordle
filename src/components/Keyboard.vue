@@ -33,7 +33,7 @@
       {{ letter }}
     </button>
 
-    <button @click="('deleteClick')" class="key large">
+    <button @click="$emit('deleteClick')" class="key large">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"
