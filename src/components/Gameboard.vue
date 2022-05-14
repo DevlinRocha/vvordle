@@ -1,7 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+defineExpose({ nextTile, getActiveTiles });
+const gameboard = ref();
+
+function nextTile() {
+  return gameboard.value.querySelector(":not([data-letter])");
+}
+
+function getActiveTiles() {
+  return gameboard.value.querySelectorAll("[data-state='active']");
+}
+</script>
 
 <template>
-  <div class="gameboard">
+  <div ref="gameboard" class="gameboard">
     <div class="tile" v-for="tile in 30" :key="tile" />
   </div>
 </template>

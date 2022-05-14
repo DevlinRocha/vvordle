@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import Keyboard from "./components/Keyboard.vue";
 import Gameboard from "./components/Gameboard.vue";
-
 import { onMounted, onUnmounted, ref } from "vue";
+
+const gameboard = ref();
+
+const WORD_LENGTH = 5;
 
 function handleKeyPress(e: KeyboardEvent) {
   if (e.key === "Enter") return submitGuess();
@@ -11,7 +14,13 @@ function handleKeyPress(e: KeyboardEvent) {
 }
 
 function pressKey(key: string) {
+  if (gameboard.value.getActiveTiles().length >= WORD_LENGTH) return;
   console.log(key.toUpperCase());
+
+  const nextTile = gameboard.value.nextTile();
+  nextTile.dataset.letter = key.toLowerCase();
+  nextTile.textContent = key.toUpperCase();
+  nextTile.dataset.state = "active";
 }
 
 function submitGuess() {
@@ -19,7 +28,13 @@ function submitGuess() {
 }
 
 function deleteKey() {
-  console.log("Deleting...");
+  const activeTiles = gameboard.value.getActiveTiles();
+  const lastTile = activeTiles[activeTiles.length - 1];
+  if (!lastTile) return;
+
+  lastTile.textContent = "";
+  delete lastTile.dataset.letter;
+  delete lastTile.dataset.state;
 }
 
 onMounted(() => {
@@ -32,7 +47,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Gameboard />
+  <Gameboard ref="gameboard" />
   <Keyboard
     @keyClick="pressKey"
     @enterClick="submitGuess"
