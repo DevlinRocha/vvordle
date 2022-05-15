@@ -22,8 +22,6 @@ function getActiveTiles() {
 <style scoped>
 .gameboard {
   display: grid;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
   grid-template-columns: repeat(5, 4em);
   grid-template-rows: repeat(6, 4em);

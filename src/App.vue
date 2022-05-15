@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import Keyboard from "./components/Keyboard.vue";
 import Gameboard from "./components/Gameboard.vue";
-import { onMounted, onUnmounted, ref } from "vue";
+import Alert from "./components/Alert.vue";
+import { onBeforeMount, onMounted, onUnmounted, ref } from "vue";
+import { dictionary, targetWords } from "./data/index";
 
 const gameboard = ref();
+const targetWord = ref(targetWords[0]);
+const isAlertActive = ref(false);
+const alertMessage = ref("");
 
 const WORD_LENGTH = 5;
 
@@ -24,7 +29,10 @@ function pressKey(key: string) {
 }
 
 function submitGuess() {
-  console.log("Submitting...");
+  const activeTiles = [...gameboard.value.getActiveTiles()];
+  if (activeTiles.length !== WORD_LENGTH) {
+    showAlert("Not enough letters");
+  }
 }
 
 function deleteKey() {
@@ -37,6 +45,23 @@ function deleteKey() {
   delete lastTile.dataset.state;
 }
 
+function showAlert(message: string, duration = 1000) {
+  isAlertActive.value = true;
+  alertMessage.value = message;
+  if (!duration) return;
+
+  setTimeout(() => {
+    isAlertActive.value = false;
+  }, duration);
+}
+
+onBeforeMount(() => {
+  const offsetFromDate = new Date(2022, 0, 1);
+  const msOffset = Date.now() - Number(offsetFromDate);
+  const dayOffset = msOffset / 1000 / 60 / 60 / 24;
+  targetWord.value = targetWords[Math.floor(dayOffset)];
+});
+
 onMounted(() => {
   document.addEventListener("keydown", handleKeyPress);
 });
@@ -47,6 +72,9 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <Transition>
+    <Alert v-if="isAlertActive" :alertMessage="alertMessage" />
+  </Transition>
   <Gameboard ref="gameboard" />
   <Keyboard
     @keyClick="pressKey"
@@ -70,10 +98,21 @@ onUnmounted(() => {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-width: 100vw;
   min-height: 100vh;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
   background-color: hsl(240, 3%, 7%);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

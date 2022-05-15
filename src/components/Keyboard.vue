@@ -55,7 +55,6 @@
   grid-template-columns: repeat(20, minmax(auto, 1.25em));
   grid-auto-rows: 3em;
   gap: 0.25em;
-  justify-content: center;
 }
 
 .key {
