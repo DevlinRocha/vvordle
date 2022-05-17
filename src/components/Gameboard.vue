@@ -12,14 +12,15 @@ function getActiveTiles() {
   return gameboard.value.querySelectorAll("[data-state='active']");
 }
 
-function shakeTiles(tiles) {
+function shakeTiles(tiles: HTMLDivElement[]) {
   tiles.forEach((tile) => {
     tile.classList.add("shake");
   });
 }
 
-function stopShake(e) {
-  e.target.classList.remove("shake");
+function stopShake(e: AnimationEvent) {
+  const tile = e.target as HTMLDivElement;
+  tile.classList.remove("shake");
 }
 </script>
 
