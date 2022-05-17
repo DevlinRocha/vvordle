@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-defineExpose({ nextTile, getActiveTiles });
+defineExpose({ nextTile, getActiveTiles, shakeTiles });
 const gameboard = ref();
 
 function nextTile() {
@@ -11,11 +11,26 @@ function nextTile() {
 function getActiveTiles() {
   return gameboard.value.querySelectorAll("[data-state='active']");
 }
+
+function shakeTiles(tiles) {
+  tiles.forEach((tile) => {
+    tile.classList.add("shake");
+  });
+}
+
+function stopShake(e) {
+  e.target.classList.remove("shake");
+}
 </script>
 
 <template>
   <div ref="gameboard" class="gameboard">
-    <div class="tile" v-for="tile in 30" :key="tile" />
+    <div
+      v-for="tile in 30"
+      @animationend="stopShake"
+      class="tile"
+      :key="tile"
+    />
   </div>
 </template>
 
@@ -60,5 +75,35 @@ function getActiveTiles() {
 .tile[data-state="correct"] {
   border: none;
   background-color: hsl(115, 29%, 43%);
+}
+
+.tile.shake {
+  animation: shake 250ms ease-in-out;
+}
+
+@keyframes shake {
+  10% {
+    transform: translateX(-5%);
+  }
+
+  30% {
+    transform: translateX(5%);
+  }
+
+  50% {
+    transform: translateX(-7.5%);
+  }
+
+  70% {
+    transform: translateX(7.5%);
+  }
+
+  90% {
+    transform: translateX(-5%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>

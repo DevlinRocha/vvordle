@@ -32,6 +32,7 @@ function submitGuess() {
   const activeTiles = [...gameboard.value.getActiveTiles()];
   if (activeTiles.length !== WORD_LENGTH) {
     showAlert("Not enough letters");
+    gameboard.value.shakeTiles(activeTiles);
   }
 }
 
