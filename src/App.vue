@@ -6,9 +6,8 @@ import { onBeforeMount, onMounted, onUnmounted, ref } from "vue";
 import { dictionary, targetWords } from "./data/index";
 
 const gameboard = ref();
+const alert = ref();
 const targetWord = ref(targetWords[0]);
-const isAlertActive = ref(false);
-const alertMessage = ref("");
 
 const WORD_LENGTH = 5;
 
@@ -20,7 +19,6 @@ function handleKeyPress(e: KeyboardEvent) {
 
 function pressKey(key: string) {
   if (gameboard.value.getActiveTiles().length >= WORD_LENGTH) return;
-  console.log(key.toUpperCase());
 
   const nextTile = gameboard.value.nextTile();
   nextTile.dataset.letter = key.toLowerCase();
@@ -31,7 +29,7 @@ function pressKey(key: string) {
 function submitGuess() {
   const activeTiles = [...gameboard.value.getActiveTiles()];
   if (activeTiles.length !== WORD_LENGTH) {
-    showAlert("Not enough letters");
+    alert.value.showAlert("Not enough letters");
     gameboard.value.shakeTiles(activeTiles);
   }
 }
@@ -44,16 +42,6 @@ function deleteKey() {
   lastTile.textContent = "";
   delete lastTile.dataset.letter;
   delete lastTile.dataset.state;
-}
-
-function showAlert(message: string, duration = 1000) {
-  isAlertActive.value = true;
-  alertMessage.value = message;
-  if (!duration) return;
-
-  setTimeout(() => {
-    isAlertActive.value = false;
-  }, duration);
 }
 
 onBeforeMount(() => {
@@ -73,9 +61,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Transition>
-    <Alert v-if="isAlertActive" :alertMessage="alertMessage" />
-  </Transition>
+  <Alert ref="alert" />
   <Gameboard ref="gameboard" />
   <Keyboard
     @keyClick="pressKey"
@@ -105,15 +91,5 @@ onUnmounted(() => {
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
   background-color: hsl(240, 3%, 7%);
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
 }
 </style>

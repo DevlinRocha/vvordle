@@ -1,13 +1,28 @@
 <script setup lang="ts">
-const props = defineProps({
-  alertMessage: String,
-});
+import { ref } from "vue";
+
+defineExpose({ showAlert });
+
+const isAlertActive = ref(false);
+const alertMessage = ref("");
+
+function showAlert(message: string, duration = 1000) {
+  isAlertActive.value = true;
+  alertMessage.value = message;
+  if (!duration) return;
+
+  setTimeout(() => {
+    isAlertActive.value = false;
+  }, duration);
+}
 </script>
 
 <template>
-  <div class="alert-container">
-    <span class="alert">{{ alertMessage }}</span>
-  </div>
+  <Transition>
+    <div v-if="isAlertActive" class="alert-container">
+      <span class="alert">{{ alertMessage }}</span>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -26,5 +41,15 @@ const props = defineProps({
 
 .alert:last-child {
   margin-bottom: 0;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
