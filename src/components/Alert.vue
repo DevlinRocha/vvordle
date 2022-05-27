@@ -29,6 +29,7 @@ function showAlert(message: string, duration = 1000) {
 .alert-container {
   position: fixed;
   top: 10vh;
+  z-index: 1;
 }
 
 .alert {
