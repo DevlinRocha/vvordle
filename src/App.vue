@@ -30,7 +30,16 @@ function submitGuess() {
   const activeTiles = [...gameboard.value.getActiveTiles()];
   if (activeTiles.length !== WORD_LENGTH) {
     alert.value.showAlert("Not enough letters");
-    gameboard.value.shakeTiles(activeTiles);
+    return gameboard.value.shakeTiles(activeTiles);
+  }
+
+  const guess = activeTiles.reduce((word, tile) => {
+    return word + tile.dataset.letter;
+  }, "");
+
+  if (!dictionary.includes(guess)) {
+    alert.value.showAlert("Not in word list");
+    return gameboard.value.shakeTiles(activeTiles);
   }
 }
 
