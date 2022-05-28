@@ -6,10 +6,12 @@ import { onBeforeMount, onMounted, onUnmounted, ref } from "vue";
 import { dictionary, targetWords } from "./data/index";
 
 const gameboard = ref();
+const keyboard = ref();
 const alert = ref();
 const targetWord = ref(targetWords[0]);
 
 const WORD_LENGTH = 5;
+const FLIP_ANIMATION_DURATION = 500;
 
 function handleKeyPress(e: KeyboardEvent) {
   if (e.key === "Enter") return submitGuess();
@@ -26,7 +28,7 @@ function pressKey(key: string) {
   nextTile.dataset.state = "active";
 }
 
-function submitGuess() {
+async function submitGuess() {
   const activeTiles = [...gameboard.value.getActiveTiles()];
   if (activeTiles.length !== WORD_LENGTH) {
     alert.value.showAlert("Not enough letters");
@@ -41,6 +43,9 @@ function submitGuess() {
     alert.value.showAlert("Not in word list");
     return gameboard.value.shakeTiles(activeTiles);
   }
+
+  stopInteraction();
+  activeTiles.forEach((...params) => flipTile(...params, guess));
 }
 
 function deleteKey() {
@@ -53,6 +58,53 @@ function deleteKey() {
   delete lastTile.dataset.state;
 }
 
+function flipTile(tile, index, array, guess) {
+  const letter = tile.dataset.letter;
+  const key = keyboard.value.getKey(letter);
+
+  setTimeout(() => {
+    tile.classList.add("flip");
+  }, (index * FLIP_ANIMATION_DURATION) / 2);
+
+  tile.addEventListener(
+    "transitionend",
+    () => {
+      tile.classList.remove("flip");
+      if (targetWord.value[index] === letter) {
+        tile.dataset.state = "correct";
+        key.classList.add("correct");
+      } else if (targetWord.value.includes(letter)) {
+        tile.dataset.state = "wrong-location";
+        key.classList.add("wrong-location");
+      } else {
+        tile.dataset.state = "wrong";
+        key.classList.add("wrong");
+      }
+
+      if (index === array.length - 1) {
+        tile.addEventListener(
+          "transitionend",
+          () => {
+            startInteraction();
+          },
+          { once: true }
+        );
+      }
+    },
+    { once: true }
+  );
+}
+
+function startInteraction() {
+  document.addEventListener("keydown", handleKeyPress);
+  keyboard.value.startInteraction();
+}
+
+function stopInteraction() {
+  document.removeEventListener("keydown", handleKeyPress);
+  keyboard.value.stopInteraction();
+}
+
 onBeforeMount(() => {
   const offsetFromDate = new Date(2022, 0, 1);
   const msOffset = Date.now() - Number(offsetFromDate);
@@ -61,11 +113,11 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-  document.addEventListener("keydown", handleKeyPress);
+  startInteraction();
 });
 
 onUnmounted(() => {
-  document.removeEventListener("keydown", handleKeyPress);
+  stopInteraction();
 });
 </script>
 
@@ -76,6 +128,7 @@ onUnmounted(() => {
     @keyClick="pressKey"
     @enterClick="submitGuess"
     @deleteClick="deleteKey"
+    ref="keyboard"
   />
 </template>
 
