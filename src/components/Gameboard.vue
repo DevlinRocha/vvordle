@@ -29,7 +29,7 @@ function shakeTiles(tiles: HTMLDivElement[]) {
   });
 }
 
-function danceTiles(tiles) {
+function danceTiles(tiles: HTMLDivElement[]) {
   tiles.forEach((tile, index) => {
     setTimeout(() => {
       tile.classList.add("dance");

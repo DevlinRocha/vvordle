@@ -45,7 +45,9 @@ async function submitGuess() {
   }
 
   stopInteraction();
-  activeTiles.forEach((...params) => flipTile(...params, guess));
+  activeTiles.forEach((...params: [HTMLDivElement, number, HTMLDivElement[]]) =>
+    flipTile(...params, guess)
+  );
 }
 
 function deleteKey() {
@@ -58,8 +60,14 @@ function deleteKey() {
   delete lastTile.dataset.state;
 }
 
-function flipTile(tile, index, array, guess) {
-  const letter = tile.dataset.letter;
+function flipTile(
+  tile: HTMLDivElement,
+  index: number,
+  array: HTMLDivElement[],
+  guess: string
+) {
+  console.log(array);
+  const letter = tile.dataset.letter || "";
   const key = keyboard.value.getKey(letter);
 
   setTimeout(() => {
@@ -96,7 +104,7 @@ function flipTile(tile, index, array, guess) {
   );
 }
 
-function checkWinLose(guess, tiles) {
+function checkWinLose(guess: string, tiles: HTMLDivElement[]) {
   if (guess === targetWord.value) {
     alert.value.showAlert("You win", 5000);
     gameboard.value.danceTiles(tiles);
