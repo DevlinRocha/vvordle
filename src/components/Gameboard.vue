@@ -57,6 +57,7 @@ function stopShake(e: AnimationEvent) {
   justify-content: center;
   align-items: center;
   user-select: none;
+  transition: transform 250ms linear;
 }
 
 .tile[data-state="active"] {
@@ -80,6 +81,10 @@ function stopShake(e: AnimationEvent) {
 
 .tile.shake {
   animation: shake 250ms ease-in-out;
+}
+
+.tile.flip {
+  transform: rotateX(90deg);
 }
 
 @keyframes shake {
