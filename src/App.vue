@@ -86,6 +86,7 @@ function flipTile(tile, index, array, guess) {
           "transitionend",
           () => {
             startInteraction();
+            checkWinLose(guess, array);
           },
           { once: true }
         );
@@ -93,6 +94,21 @@ function flipTile(tile, index, array, guess) {
     },
     { once: true }
   );
+}
+
+function checkWinLose(guess, tiles) {
+  if (guess === targetWord.value) {
+    alert.value.showAlert("You win", 5000);
+    gameboard.value.danceTiles(tiles);
+    return stopInteraction();
+  }
+
+  const remainingTiles = gameboard.value.getRemainingTiles();
+
+  if (remainingTiles.length === 0) {
+    alert.value.showAlert(targetWord.value.toUpperCase(), null);
+    stopInteraction();
+  }
 }
 
 function startInteraction() {
