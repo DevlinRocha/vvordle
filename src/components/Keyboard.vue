@@ -1,10 +1,42 @@
+<script setup>
+import { onMounted, ref } from "vue";
+defineExpose({ startInteraction, stopInteraction, getKey });
+const emit = defineEmits(["keyClick", "enterClick", "deleteClick"]);
+
+const letterKey = ref();
+const enterKey = ref();
+const deleteKey = ref();
+
+function getKey(letter) {
+  for (const key of letterKey.value) {
+    if (key.textContent === letter.toUpperCase()) return key;
+  }
+}
+
+function startInteraction() {
+  for (const key of letterKey.value) {
+    key.addEventListener("click", () => emit("keyClick", key.textContent));
+  }
+  enterKey.value.addEventListener("click", () => emit("enterClick"));
+  deleteKey.value.addEventListener("click", () => emit("deleteClick"));
+}
+
+function stopInteraction() {
+  for (const key of letterKey.value) {
+    key.removeEventListener("click", () => emit("keyClick", key.textContent));
+  }
+  enterKey.value.removeEventListener("click", () => emit("enterClick"));
+  deleteKey.value.removeEventListener("click", () => emit("deleteClick"));
+}
+</script>
+
 <template>
   <div class="keyboard">
     <button
       v-for="letter in ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']"
-      @click="$emit('keyClick', letter)"
       class="key"
       :key="letter"
+      ref="letterKey"
     >
       {{ letter }}
     </button>
@@ -13,27 +45,27 @@
 
     <button
       v-for="letter in ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']"
-      @click="$emit('keyClick', letter)"
       class="key"
       :key="letter"
+      ref="letterKey"
     >
       {{ letter }}
     </button>
 
     <div class="space" />
 
-    <button @click="$emit('enterClick')" class="key large">Enter</button>
+    <button class="key large" ref="enterKey">Enter</button>
 
     <button
       v-for="letter in ['Z', 'X', 'C', 'V', 'B', 'N', 'M']"
-      @click="$emit('keyClick', letter)"
       class="key"
       :key="letter"
+      ref="letterKey"
     >
       {{ letter }}
     </button>
 
-    <button @click="$emit('deleteClick')" class="key large">
+    <button class="key large" ref="deleteKey">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"
