@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-defineExpose({ nextTile, getActiveTiles, shakeTiles });
+defineExpose({
+  nextTile,
+  getActiveTiles,
+  shakeTiles,
+  danceTiles,
+  getRemainingTiles,
+});
 const gameboard = ref();
+const DANCE_ANIMATION_DURATION = 500;
 
 function nextTile() {
   return gameboard.value.querySelector(":not([data-letter])");
@@ -12,15 +19,28 @@ function getActiveTiles() {
   return gameboard.value.querySelectorAll("[data-state='active']");
 }
 
+function getRemainingTiles() {
+  return gameboard.value.querySelectorAll(":not([data-letter])");
+}
+
 function shakeTiles(tiles: HTMLDivElement[]) {
   tiles.forEach((tile) => {
     tile.classList.add("shake");
   });
 }
 
-function stopShake(e: AnimationEvent) {
+function danceTiles(tiles) {
+  tiles.forEach((tile, index) => {
+    setTimeout(() => {
+      tile.classList.add("dance");
+    }, (index * DANCE_ANIMATION_DURATION) / 5);
+  });
+}
+
+function stopAnimation(e: AnimationEvent) {
   const tile = e.target as HTMLDivElement;
   tile.classList.remove("shake");
+  tile.classList.remove("dance");
 }
 </script>
 
@@ -28,7 +48,7 @@ function stopShake(e: AnimationEvent) {
   <div ref="gameboard" class="gameboard">
     <div
       v-for="tile in 30"
-      @animationend="stopShake"
+      @animationend="stopAnimation"
       class="tile"
       :key="tile"
     />
@@ -83,6 +103,10 @@ function stopShake(e: AnimationEvent) {
   animation: shake 250ms ease-in-out;
 }
 
+.tile.dance {
+  animation: dance 500ms ease-in-out;
+}
+
 .tile.flip {
   transform: rotateX(90deg);
 }
@@ -110,6 +134,32 @@ function stopShake(e: AnimationEvent) {
 
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes dance {
+  20% {
+    transform: translateY(-50%);
+  }
+
+  40% {
+    transform: translateY(5%);
+  }
+
+  60% {
+    transform: translateY(-25%);
+  }
+
+  80% {
+    transform: translateY(2.5%);
+  }
+
+  90% {
+    transform: translateY(-5%);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
 </style>
