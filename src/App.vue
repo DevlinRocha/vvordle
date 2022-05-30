@@ -66,7 +66,6 @@ function flipTile(
   array: HTMLDivElement[],
   guess: string
 ) {
-  console.log(array);
   const letter = tile.dataset.letter || "";
   const key = keyboard.value.getKey(letter);
 
