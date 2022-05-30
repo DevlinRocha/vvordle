@@ -171,10 +171,11 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
   background-color: hsl(240, 3%, 7%);
+  touch-action: manipulation;
 }
 </style>
