@@ -16,7 +16,7 @@ const FLIP_ANIMATION_DURATION = 500;
 function handleKeyPress(e: KeyboardEvent) {
   if (e.key === "Enter") return submitGuess();
   if (e.key === "Backspace") return deleteKey();
-  if (e.key.match(/^[a-z]/)) return pressKey(e.key);
+  if (e.key.match(/^[a-zA-Z]$/)) return pressKey(e.key);
 }
 
 function pressKey(key: string) {
