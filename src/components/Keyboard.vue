@@ -13,20 +13,33 @@ function getKey(letter) {
   }
 }
 
+function emitClick(e) {
+  return emit("keyClick", e.currentTarget.textContent);
+}
+
+function emitEnter(e) {
+  return emit("enterClick");
+}
+
+function emitDelete(e) {
+  return emit("deleteClick");
+}
+
 function startInteraction() {
   for (const key of letterKey.value) {
-    key.addEventListener("click", () => emit("keyClick", key.textContent));
+    key.addEventListener("click", emitClick);
+    key.value = key.textContent;
   }
-  enterKey.value.addEventListener("click", () => emit("enterClick"));
-  deleteKey.value.addEventListener("click", () => emit("deleteClick"));
+  enterKey.value.addEventListener("click", emitEnter);
+  deleteKey.value.addEventListener("click", emitDelete);
 }
 
 function stopInteraction() {
   for (const key of letterKey.value) {
-    key.removeEventListener("click", () => emit("keyClick", key.textContent));
+    key.removeEventListener("click", emitClick);
   }
-  enterKey.value.removeEventListener("click", () => emit("enterClick"));
-  deleteKey.value.removeEventListener("click", () => emit("deleteClick"));
+  enterKey.value.removeEventListener("click", emitEnter);
+  deleteKey.value.removeEventListener("click", emitDelete);
 }
 </script>
 
