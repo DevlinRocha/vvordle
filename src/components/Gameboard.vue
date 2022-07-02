@@ -74,6 +74,7 @@ function stopAnimation(e: AnimationEvent) {
   gap: 0.3125rem;
   width: 350px;
   height: 420px;
+  margin-bottom: 1rem;
 }
 
 .tile {
