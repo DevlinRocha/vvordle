@@ -45,28 +45,39 @@ function stopAnimation(e: AnimationEvent) {
 </script>
 
 <template>
-  <div ref="gameboard" class="gameboard">
-    <div
-      v-for="tile in 30"
-      @animationend="stopAnimation"
-      class="tile"
-      :key="tile"
-    />
+  <div class="wrapper">
+    <div ref="gameboard" class="gameboard">
+      <div
+        v-for="tile in 30"
+        @animationend="stopAnimation"
+        class="tile"
+        :key="tile"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+}
+
 .gameboard {
   display: grid;
-  flex-grow: 1;
-  grid-template-columns: repeat(5, 4em);
-  grid-template-rows: repeat(6, 4em);
-  gap: 0.25em;
-  margin-bottom: 1em;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 0.3125rem;
+  width: 350px;
+  height: 420px;
 }
 
 .tile {
-  font-size: 2em;
+  font-size: 2rem;
   color: white;
   border: 0.05em solid hsl(240, 2%, 23%);
   width: 100%;

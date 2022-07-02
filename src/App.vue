@@ -156,6 +156,14 @@ onUnmounted(() => {
 </template>
 
 <style>
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 *,
 *::before,
 *::after {
@@ -171,10 +179,13 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
-  padding: 1em;
-  font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  font-size: clamp(0.5rem, 3vmin, 1rem);
   background-color: hsl(240, 3%, 7%);
+  overflow: hidden;
+  touch-action: manipulation;
 }
 </style>
