@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Keyboard from "./components/Keyboard.vue";
 import Gameboard from "./components/Gameboard.vue";
+import Header from "./components/Header.vue";
 import Alert from "./components/Alert.vue";
 import { onBeforeMount, onMounted, onUnmounted, ref } from "vue";
 import { dictionary, targetWords } from "./data/index";
@@ -146,6 +147,7 @@ onUnmounted(() => {
 
 <template>
   <Alert ref="alert" />
+  <Header />
   <Gameboard ref="gameboard" />
   <Keyboard
     @keyClick="pressKey"
