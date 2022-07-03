@@ -146,15 +146,17 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Alert ref="alert" />
   <Header />
-  <Gameboard ref="gameboard" />
-  <Keyboard
-    @keyClick="pressKey"
-    @enterClick="submitGuess"
-    @deleteClick="deleteKey"
-    ref="keyboard"
-  />
+  <div class="game-wrapper">
+    <Alert ref="alert" />
+    <Gameboard ref="gameboard" />
+    <Keyboard
+      @keyClick="pressKey"
+      @enterClick="submitGuess"
+      @deleteClick="deleteKey"
+      ref="keyboard"
+    />
+  </div>
 </template>
 
 <style>
@@ -184,10 +186,18 @@ body {
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
   font-size: clamp(0.5rem, 3vmin, 1rem);
   background-color: hsl(240, 3%, 7%);
   overflow: hidden;
   touch-action: manipulation;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  height: calc(100% - 50px);
+  padding: 0.5rem;
 }
 </style>
