@@ -64,7 +64,6 @@ function stopAnimation(e: AnimationEvent) {
   align-items: center;
   width: 100%;
   height: 100%;
-  flex-grow: 1;
 }
 
 .gameboard {
@@ -75,6 +74,7 @@ function stopAnimation(e: AnimationEvent) {
   width: 350px;
   height: 420px;
   margin-bottom: 1rem;
+  padding: 10px;
 }
 
 .tile {

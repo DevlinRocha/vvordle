@@ -100,8 +100,8 @@ function stopInteraction() {
 .wrapper {
   width: 100%;
   height: 200px;
-  max-width: 500px;
-  align-items: flex-end;
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .keyboard {
@@ -110,7 +110,7 @@ function stopInteraction() {
   grid-auto-rows: 1fr;
   gap: 0.375rem;
   width: 100%;
-  height: 200px;
+  height: 100%;
   justify-content: center;
 }
 
