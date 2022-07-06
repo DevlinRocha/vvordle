@@ -180,6 +180,8 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   font-size: clamp(0.5rem, 3vmin, 1rem);
@@ -194,6 +196,6 @@ body {
   width: 100%;
   max-width: 500px;
   height: calc(100% - 50px);
-  padding: 0.5rem;
+  margin: 0 auto;
 }
 </style>
