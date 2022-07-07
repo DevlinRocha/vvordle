@@ -193,6 +193,7 @@ body {
 .game-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 500px;
   height: calc(100% - 50px);
