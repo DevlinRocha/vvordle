@@ -146,7 +146,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Header />
   <div class="game-wrapper">
     <Alert ref="alert" />
     <Gameboard ref="gameboard" />
@@ -196,7 +195,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 500px;
-  height: calc(100% - 50px);
+  height: 100%;
   margin: 0 auto;
 }
 </style>
