@@ -1,9 +1,9 @@
 <template>
-  <div>VVordle</div>
+  <header>VVordle</header>
 </template>
 
 <style scoped>
-div {
+header {
   display: flex;
   justify-content: center;
   align-items: center;
