@@ -141,6 +141,14 @@ function closeResults() {
   showResults.value = false;
 }
 
+function shareResults() {
+  alert.value.showAlert("Copied results to clipboard");
+
+  navigator.clipboard.writeText(`VVordle
+
+${gameboard.value.getResults()}`);
+}
+
 onBeforeMount(() => {
   const offsetFromDate = new Date(2022, 0, 1);
   const msOffset = Date.now() - Number(offsetFromDate);
@@ -160,7 +168,7 @@ onUnmounted(() => {
 <template>
   <div class="game-wrapper">
     <Alert ref="alert" />
-    <Results @closeResults="closeResults" v-if="showResults" />
+    <Results v-if="showResults" @share="shareResults" @close="closeResults" />
     <Gameboard ref="gameboard" />
     <Keyboard
       @keyClick="pressKey"

@@ -1,14 +1,20 @@
 <script setup lang="ts">
-const emit = defineEmits(["closeResults"]);
+const emit = defineEmits(["share", "close"]);
+
+function share() {
+  emit("share");
+}
 
 function close() {
-  emit("closeResults");
+  emit("close");
 }
 </script>
 
 <template>
   <div @click="close" class="backdrop">
-    <div class="wrapper"><button>SHARE</button></div>
+    <div class="wrapper">
+      <button @click.stop="share">SHARE</button>
+    </div>
   </div>
 </template>
 
