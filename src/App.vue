@@ -3,6 +3,7 @@ import Keyboard from "./components/Keyboard.vue";
 import Gameboard from "./components/Gameboard.vue";
 import Header from "./components/Header.vue";
 import Alert from "./components/Alert.vue";
+import Results from "./components/Results.vue";
 import { onBeforeMount, onMounted, onUnmounted, ref } from "vue";
 import { dictionary, targetWords } from "./data/index";
 
@@ -10,6 +11,7 @@ const gameboard = ref();
 const keyboard = ref();
 const alert = ref();
 const targetWord = ref(targetWords[0]);
+const showResults = ref(false);
 
 const WORD_LENGTH = 5;
 const FLIP_ANIMATION_DURATION = 500;
@@ -106,16 +108,18 @@ function flipTile(
 
 function checkWinLose(guess: string, tiles: HTMLDivElement[]) {
   if (guess === targetWord.value) {
+    stopInteraction();
     alert.value.showAlert("You win", 5000);
     gameboard.value.danceTiles(tiles);
-    return stopInteraction();
+    return openResults();
   }
 
   const remainingTiles = gameboard.value.getRemainingTiles();
 
   if (remainingTiles.length === 0) {
-    alert.value.showAlert(targetWord.value.toUpperCase(), null);
     stopInteraction();
+    alert.value.showAlert(targetWord.value.toUpperCase(), null);
+    return openResults();
   }
 }
 
@@ -127,6 +131,22 @@ function startInteraction() {
 function stopInteraction() {
   document.removeEventListener("keydown", handleKeyPress);
   keyboard.value.stopInteraction();
+}
+
+function openResults() {
+  showResults.value = true;
+}
+
+function closeResults() {
+  showResults.value = false;
+}
+
+function shareResults() {
+  alert.value.showAlert("Copied results to clipboard");
+
+  navigator.clipboard.writeText(`VVordle
+
+${gameboard.value.getResults()}`);
 }
 
 onBeforeMount(() => {
@@ -148,6 +168,7 @@ onUnmounted(() => {
 <template>
   <div class="game-wrapper">
     <Alert ref="alert" />
+    <Results v-if="showResults" @share="shareResults" @close="closeResults" />
     <Gameboard ref="gameboard" />
     <Keyboard
       @keyClick="pressKey"
