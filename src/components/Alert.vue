@@ -30,6 +30,7 @@ function showAlert(message: string, duration = 1000) {
   position: fixed;
   top: 10vh;
   z-index: 1;
+  user-select: none;
 }
 
 .alert {
