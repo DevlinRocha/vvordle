@@ -133,8 +133,10 @@ function stopInteraction() {
   keyboard.value.stopInteraction();
 }
 
-function openResults() {
-  showResults.value = true;
+function openResults(duration = 2500) {
+  setTimeout(() => {
+    showResults.value = true;
+  }, duration);
 }
 
 function closeResults() {
