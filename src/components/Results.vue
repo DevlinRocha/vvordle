@@ -12,7 +12,7 @@ function close() {
 
 <template>
   <div @click="close" class="backdrop">
-    <div class="wrapper">
+    <div @click.stop class="wrapper">
       <button @click.stop="share">SHARE</button>
     </div>
   </div>
