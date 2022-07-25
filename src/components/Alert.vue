@@ -34,11 +34,12 @@ function showAlert(message: string, duration = 1000) {
 }
 
 .alert {
-  pointer-events: none;
   background-color: hsl(204, 7%, 85%);
   padding: 0.75rem;
   border-radius: 0.25rem;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background-color: white;
+  pointer-events: none;
 }
 
 .alert:last-child {
