@@ -109,7 +109,7 @@ function flipTile(
 function checkWinLose(guess: string, tiles: HTMLDivElement[]) {
   if (guess === targetWord.value) {
     stopInteraction();
-    alert.value.showAlert("You win", 5000);
+    alert.value.showAlert("You win", 2500);
     gameboard.value.danceTiles(tiles);
     return openResults();
   }
@@ -144,7 +144,7 @@ function closeResults() {
 }
 
 function shareResults() {
-  alert.value.showAlert("Copied results to clipboard");
+  alert.value.showAlert("Copied results to clipboard", 2500);
 
   navigator.clipboard.writeText(`VVordle
 
