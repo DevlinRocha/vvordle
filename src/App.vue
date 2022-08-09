@@ -146,13 +146,11 @@ function closeResults() {
 function shareResults() {
   alert.value.showAlert("Copied results to clipboard", 2500);
 
-  const shareData = `VVordle
-
-${gameboard.value.getResults()}`;
+  const results = gameboard.value.getResults();
 
   !!navigator.share
-    ? navigator.share({ text: shareData })
-    : navigator.clipboard.writeText(shareData);
+    ? navigator.share({ text: results })
+    : navigator.clipboard.writeText(results);
 }
 
 function isMobile() {

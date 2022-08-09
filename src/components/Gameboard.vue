@@ -46,7 +46,9 @@ function getResults() {
 `;
   }
 
-  return results;
+  return `VVordle
+  
+${results}`;
 }
 
 function shakeTiles(tiles: HTMLDivElement[]) {
