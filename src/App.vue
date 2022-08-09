@@ -6,6 +6,7 @@ import Alert from "./components/Alert.vue";
 import Results from "./components/Results.vue";
 import { onBeforeMount, onMounted, onUnmounted, ref } from "vue";
 import { dictionary, targetWords } from "./data/index";
+import { getDayOffset } from "./utilities/functions";
 
 const gameboard = ref();
 const keyboard = ref();
@@ -170,10 +171,7 @@ function isMobile() {
 }
 
 onBeforeMount(() => {
-  const offsetFromDate = new Date(2022, 0, 1);
-  const msOffset = Date.now() - Number(offsetFromDate);
-  const dayOffset = msOffset / 1000 / 60 / 60 / 24;
-  targetWord.value = targetWords[Math.floor(dayOffset)];
+  targetWord.value = targetWords[Math.floor(getDayOffset())];
 });
 
 onMounted(() => {

@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, ref } from "vue";
+
 defineExpose({ startInteraction, stopInteraction, getKey });
+
 const emit = defineEmits(["keyClick", "enterClick", "deleteClick"]);
 
 const letterKey = ref();
