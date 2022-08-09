@@ -46,8 +46,14 @@ function getResults() {
 `;
   }
 
-  return `VVordle
-  
+  let lose = false;
+
+  for (const tile of resultsArray.slice(-5)) {
+    if (tile !== "🟩") lose = true;
+  }
+
+  return `VVordle ${lose ? "X" : resultsArray.length / 5}/6
+
 ${results}`;
 }
 
