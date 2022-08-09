@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { getDayOffset } from "../utilities/functions";
 
 defineExpose({
   nextTile,
@@ -9,6 +10,7 @@ defineExpose({
   danceTiles,
   getRemainingTiles,
 });
+
 const gameboard = ref();
 const DANCE_ANIMATION_DURATION = 500;
 
@@ -52,7 +54,9 @@ function getResults() {
     if (tile !== "🟩") lose = true;
   }
 
-  return `VVordle ${lose ? "X" : resultsArray.length / 5}/6
+  return `VVordle ${Math.floor(getDayOffset())} ${
+    lose ? "X" : resultsArray.length / 5
+  }/6
 
 ${results}`;
 }
