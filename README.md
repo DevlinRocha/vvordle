@@ -6,6 +6,8 @@ VVordle is a Wordle clone built with Vue, Vite, and TypeScript.
 
 ## Instructions
 
+VVordle uses the original list of words before The New York Times Company purchased Wordle.
+
 - Guess the VVORDLE in six tries.
 - Each guess must be a valid five-letter word. Hit the enter button to submit.
 - After each guess, the color of the tiles will change to show how close your guess was to the word.
