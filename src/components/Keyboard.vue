@@ -9,21 +9,21 @@ const letterKey = ref();
 const enterKey = ref();
 const deleteKey = ref();
 
-function getKey(letter) {
+function getKey(letter: string) {
   for (const key of letterKey.value) {
     if (key.textContent === letter.toUpperCase()) return key;
   }
 }
 
-function emitClick(e) {
-  return emit("keyClick", e.currentTarget.textContent);
+function emitClick(e: PointerEvent) {
+  return emit("keyClick", (e.currentTarget as HTMLDivElement).textContent);
 }
 
-function emitEnter(e) {
+function emitEnter(e: PointerEvent) {
   return emit("enterClick");
 }
 
-function emitDelete(e) {
+function emitDelete(e: PointerEvent) {
   return emit("deleteClick");
 }
 
