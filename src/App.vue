@@ -171,7 +171,7 @@ function isMobile() {
 }
 
 onBeforeMount(() => {
-  targetWord.value = targetWords[Math.floor(getDayOffset())];
+  targetWord.value = targetWords[getDayOffset()];
 });
 
 onMounted(() => {
