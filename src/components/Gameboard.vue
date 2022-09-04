@@ -58,7 +58,7 @@ function getResults() {
     lose ? "X" : resultsArray.length / 5
   }/6
 
-${results}`;
+${results}`.trim();
 }
 
 function shakeTiles(tiles: HTMLDivElement[]) {
