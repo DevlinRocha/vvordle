@@ -54,9 +54,7 @@ function getResults() {
     if (tile !== "🟩") lose = true;
   }
 
-  return `VVordle ${Math.floor(getDayOffset())} ${
-    lose ? "X" : resultsArray.length / 5
-  }/6
+  return `VVordle ${getDayOffset()} ${lose ? "X" : resultsArray.length / 5}/6
 
 ${results}`.trim();
 }

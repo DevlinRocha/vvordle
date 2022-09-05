@@ -145,13 +145,12 @@ function closeResults() {
 }
 
 function shareResults() {
-  alert.value.showAlert("Copied results to clipboard", 2500);
-
   const results = gameboard.value.getResults();
 
-  !!navigator.share
-    ? navigator.share({ text: results })
-    : navigator.clipboard.writeText(results);
+  if (!!navigator.share) return navigator.share({ text: results.join("") });
+
+  alert.value.showAlert("Copied results to clipboard", 2500);
+  navigator.clipboard.writeText(results);
 }
 
 function isMobile() {
@@ -171,7 +170,7 @@ function isMobile() {
 }
 
 onBeforeMount(() => {
-  targetWord.value = targetWords[Math.floor(getDayOffset())];
+  targetWord.value = targetWords[getDayOffset()];
 });
 
 onMounted(() => {
