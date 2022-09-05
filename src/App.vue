@@ -147,7 +147,7 @@ function closeResults() {
 function shareResults() {
   const results = gameboard.value.getResults();
 
-  if (!!navigator.share) return navigator.share({ text: results.join("") });
+  if (navigator.share) return navigator.share({ text: results });
 
   alert.value.showAlert("Copied results to clipboard", 2500);
   navigator.clipboard.writeText(results);
